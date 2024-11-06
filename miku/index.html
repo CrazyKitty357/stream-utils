@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Extended "Vocaloid" Encoder/Decoder</title>
+    <link rel="stylesheet" href="/styles.css">
+    <style>
+        html {
+            background-image: url("https://media1.tenor.com/m/SBXNl1cJf6IAAAAd/miku-hi.gif");
+            background-size: 50%;
+            color: black;
+        }
+    </style>
+</head>
+<body>
+    <center>
+    <h1>Extended "Vocaloid" Encoder/Decoder</h1>
+    <p>this compresses text via <a href="https://github.com/qntm/base32768">Base32768</a> to make longer songs playable in twitch chat</p>
+    <textarea id="inputText" placeholder="Enter song here..."></textarea><br>
+    <button onclick="encodeText()">Encode</button>
+    <button onclick="decodeText()">Decode</button>
+    <p><strong>Result:</strong></p>
+    <div id="result"></div>
+    </center>
+    <script>
+        async function loadBase32768() {
+            const { encode, decode } = await import("https://cdn.jsdelivr.net/npm/base32768");
+            return { encode, decode };
+        }
+
+        async function encodeText() {
+            const { encode } = await loadBase32768();
+            const input = document.getElementById("inputText").value;
+            const encoded = encode(new TextEncoder().encode(input));
+            document.getElementById("result").innerText = encoded;
+        }
+
+        async function decodeText() {
+            const { decode } = await loadBase32768();
+            const input = document.getElementById("inputText").value;
+            const decoded = new TextDecoder().decode(decode(input));
+            document.getElementById("result").innerText = decoded;
+        }
+    </script>
+</body>
+</html>

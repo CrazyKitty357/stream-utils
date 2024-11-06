@@ -1,0 +1,10 @@
+@font-face {
+    font-family: 'DepartureMono';
+    src: url('/assets/DepartureMono-Regular.woff') format('woff2');
+    font-weight: normal;
+    font-style: normal;
+}
+
+html {
+    font-family: 'DepartureMono', sans-serif;
+}
