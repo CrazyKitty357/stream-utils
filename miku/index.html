@@ -17,6 +17,7 @@
     <center>
     <h1>Extended "Vocaloid" Encoder/Decoder</h1>
     <p>this compresses text via <a href="https://github.com/qntm/base32768">Base32768</a> to make longer songs playable in twitch chat</p>
+    <p>if you want to a midi converter or just have music to use this thing with go use <a href="https://pub.colonq.computer/~prod/toy/dbkai/">dbkai</a> and press the 'crazykitty' button on music also <a href="https://twitch.tv/prodzpod">shoutout prod</a> they are friend they are <a href="https://youtu.be/s8QpvPYC6zQ?t=7540">!oomfie</a>.</p>
     <textarea id="inputText" placeholder="Enter song here..."></textarea><br>
     <div>
         <button onclick="encodeText()">Encode</button>
@@ -26,6 +27,10 @@
         <button onclick="encodeTone()">Tone Encode</button>
         <button onclick="decodeTone()">Tone Decode</button>
     </div>
+    <!-- <div>
+        <button onclick="">Sound Encode</button>
+        <button onclick="">Sound Decode</button>
+    </div> -->
     <p><strong>Result:</strong></p>
     <textarea id="result" hidden></textarea>
     </center>
@@ -61,7 +66,7 @@
             const { compressed, toneMap, lengthMap } = compactEncode(input);
             console.log("Compressed Tones:", compressed);
             if(compressed == "[]%!") {
-                document.getElementById("result").innerText = "Error: Invalid input";
+                document.getElementById("result").innerText = "Error: Invalid input, text must be formatted like [:t<hz> <ms>]";
                 document.getElementById("result").hidden = false;
                 return;
             }
