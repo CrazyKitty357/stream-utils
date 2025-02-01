@@ -1,89 +1,113 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Extended "Vocaloid" Encoder/Decoder</title>
-    <link rel="stylesheet" href="../styles.css">
-    <style>
-        html {
-            background-image: url("https://media1.tenor.com/m/SBXNl1cJf6IAAAAd/miku-hi.gif");
-            background-size: 50%;
-            color: black;
-        }
-    </style>
-</head>
-<body>
-    <center>
-    <h1>Extended "Vocaloid" Encoder/Decoder</h1>
-    <p>this compresses text via <a href="https://github.com/qntm/base32768">Base32768</a> to make longer songs playable in twitch chat</p>
-    <p>if you want to a midi converter or just have music to use this thing with go use <a href="https://pub.colonq.computer/~prod/toy/dbkai/">dbkai</a> and press the 'crazykitty' button on music also <a href="https://twitch.tv/prodzpod">shoutout prod</a> they are friend they are <a href="https://youtu.be/s8QpvPYC6zQ?t=7540">!oomfie</a>.</p>
-    <textarea id="inputText" placeholder="Enter song here..."></textarea><br>
-    <div>
-        <button onclick="encodeText()">Encode</button>
-        <button onclick="decodeText()">Decode</button>
-    </div>
-    <div>
-        <button onclick="encodeTone()">Tone Encode</button>
-        <button onclick="decodeTone()">Tone Decode</button>
-    </div>
-    <!-- <div>
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Extended "Vocaloid" Encoder/Decoder</title>
+        <link rel="stylesheet" href="../styles.css" />
+        <style>
+            html {
+                background-image: url("https://media1.tenor.com/m/SBXNl1cJf6IAAAAd/miku-hi.gif");
+                background-size: 50%;
+                color: black;
+                background-color: #fff;
+            }
+        </style>
+    </head>
+    <body>
+        <center>
+            <h1>Extended "Vocaloid" Encoder/Decoder</h1>
+            <p>
+                this compresses text via
+                <a href="https://github.com/qntm/base32768">Base32768</a> and a
+                <a href="future-tone.js">custom encoder (tones)</a> to make
+                longer songs playable in twitch chat
+            </p>
+            <p>
+                if you want to a midi converter or just have music to use this
+                thing with go use
+                <a href="https://pub.colonq.computer/~prod/toy/dbkai/">dbkai</a>
+                and press the 'crazykitty' button on music also
+                <a href="https://twitch.tv/prodzpod">shoutout prod</a> they are
+                <a href="https://youtu.be/s8QpvPYC6zQ?t=7540">!oomfie</a>.
+            </p>
+            <p>
+                I have also made a <a href="guide/">guide</a>, it's very useful!
+            </p>
+            <textarea id="inputText" placeholder="Enter song here..."></textarea
+            ><br />
+            <div>
+                <button onclick="encodeText()">Encode</button>
+                <button onclick="decodeText()">Decode</button>
+            </div>
+            <div>
+                <button onclick="encodeTone()">Tone Encode</button>
+                <button onclick="decodeTone()">Tone Decode</button>
+            </div>
+            <!-- <div>
         <button onclick="">Sound Encode</button>
         <button onclick="">Sound Decode</button>
     </div> -->
-    <p><strong>Result:</strong></p>
-    <textarea id="result" hidden></textarea>
-    </center>
-    <script>
-        async function loadDectalk() {
-            const { compactEncode, compactDecode } = await import("https://crazykitty357.github.io/stream-utils/miku/dectalk-minimizer.js");
-            return { compactEncode, compactDecode };
-        }
-        async function loadBase32768() {
-            const { encode, decode } = await import("https://cdn.jsdelivr.net/npm/base32768");
-            return { encode, decode };
-        }
-
-        async function encodeText() {
-            const { encode } = await loadBase32768();
-            const input = document.getElementById("inputText").value;
-            const encoded = encode(new TextEncoder().encode(input));
-            document.getElementById("result").innerText = encoded;
-            document.getElementById("result").hidden = false;
-        }
-        async function decodeText() {
-            const { decode } = await loadBase32768();
-            const input = document.getElementById("inputText").value;
-            const decoded = new TextDecoder().decode(decode(input));
-            document.getElementById("result").innerText = decoded;
-            document.getElementById("result").hidden = false;
-        }
-        
-        async function encodeTone() {
-            const { compactEncode } = await loadDectalk();
-            const { encode } = await loadBase32768();
-            const input = document.getElementById("inputText").value;
-            const { compressed, toneMap, lengthMap } = compactEncode(input);
-            console.log("Compressed Tones:", compressed);
-            if(compressed == "[]%!") {
-                document.getElementById("result").innerText = "Error: Invalid input, text must be formatted like [:t<hz> <ms>]";
-                document.getElementById("result").hidden = false;
-                return;
+            <p><strong>Result:</strong></p>
+            <textarea id="result" hidden></textarea>
+        </center>
+        <script>
+            async function loadDectalk() {
+                const { toneEncode, toneDecode } = await import(
+                    "/miku/future-tone.js"
+                );
+                return { toneEncode, toneDecode };
             }
-            const encodedText = encode(new TextEncoder().encode(compressed));
-            document.getElementById("result").innerText = encodedText;
-            document.getElementById("result").hidden = false;
-        }
-        async function decodeTone() {
-            const { decode } = await loadBase32768();
-            const { compactDecode } = await loadDectalk();
-            const input = document.getElementById("inputText").value;
-            const decodedText = new TextDecoder().decode(decode(input));
-            const decoded = compactDecode(decodedText);
-            console.log("Decompressed:", decodedText);
-            document.getElementById("result").innerText = decoded;
-            document.getElementById("result").hidden = false;
-        }
-    </script>
-</body>
+            async function loadBase32768() {
+                const { encode, decode } = await import(
+                    "https://cdn.jsdelivr.net/npm/base32768"
+                );
+                return { encode, decode };
+            }
+
+            async function encodeText() {
+                const { encode } = await loadBase32768();
+                const input = document.getElementById("inputText").value;
+                const encoded = encode(new TextEncoder().encode(input));
+                document.getElementById("result").innerText = encoded;
+                document.getElementById("result").hidden = false;
+            }
+            async function decodeText() {
+                const { decode } = await loadBase32768();
+                const input = document.getElementById("inputText").value;
+                const decoded = new TextDecoder().decode(decode(input));
+                document.getElementById("result").innerText = decoded;
+                document.getElementById("result").hidden = false;
+            }
+
+            async function encodeTone() {
+                const { toneEncode } = await loadDectalk();
+                const { encode } = await loadBase32768();
+                const input = document.getElementById("inputText").value;
+                const { compressed, toneMap, lengthMap } = toneEncode(input);
+                console.log("Compressed Tones:", compressed);
+                if (compressed == "[]%!") {
+                    document.getElementById("result").innerText =
+                        "Error: Invalid input, text must be formatted like [:t<hz> <ms>]";
+                    document.getElementById("result").hidden = false;
+                    return;
+                }
+                const encodedText = encode(
+                    new TextEncoder().encode(compressed),
+                );
+                document.getElementById("result").innerText = encodedText;
+                document.getElementById("result").hidden = false;
+            }
+            async function decodeTone() {
+                const { decode } = await loadBase32768();
+                const { toneDecode } = await loadDectalk();
+                const input = document.getElementById("inputText").value;
+                const decodedText = new TextDecoder().decode(decode(input));
+                const decoded = toneDecode(decodedText);
+                console.log("Decompressed:", decodedText);
+                document.getElementById("result").innerText = decoded;
+                document.getElementById("result").hidden = false;
+            }
+        </script>
+    </body>
 </html>

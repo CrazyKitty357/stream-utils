@@ -1,10 +1,23 @@
 @font-face {
-    font-family: 'DepartureMono';
-    src: url('assets/DepartureMono-Regular.woff') format('woff2');
+    font-family: "DepartureMono";
+    src: url("assets/DepartureMono-Regular.woff") format("woff2");
     font-weight: normal;
     font-style: normal;
 }
 
+@media (prefers-color-scheme: light) {
+    html {
+        background-color: #fff;
+        color: #000;
+    }
+}
+@media (prefers-color-scheme: dark) {
+    html {
+        background-color: #000;
+        color: #fff;
+    }
+}
+
 html {
-    font-family: 'DepartureMono', sans-serif;
+    font-family: "DepartureMono", sans-serif;
 }

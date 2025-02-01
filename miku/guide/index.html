@@ -1,0 +1,95 @@
+<!doctype html>
+<html>
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Miku Dectalk Guide</title>
+        <style>
+            html {
+                background: url("https://media.tenor.com/powIY0Hti7YAAAAi/kasane-teto-utau.gif");
+                background-position: center;
+            }
+            #guide-segment {
+                width: 90%;
+                max-width: 600px;
+                border-style: solid;
+                border-width: 4px;
+                border-color: rgb(255, 100, 80);
+                background-color: white;
+                border-radius: 10px;
+                color: #000;
+            }
+        </style>
+        <link rel="stylesheet" href="../../styles.css" />
+    </head>
+    <body>
+        <center>
+            <div id="guide-segment">
+                <p>This guide will mainly focus on making music via dectalk</p>
+                <p>
+                    I recommend reading
+                    <a href="https://coffeethencode.dev/dectalk">this</a> as it
+                    is a great general guide for how dectalk works.
+                </p>
+            </div>
+            <br />
+
+            <div id="guide-segment">
+                <p>
+                    <u><b>PART 1 - BASIC FORMATTING</b></u>
+                </p>
+                <p>The basic formatting for what I call "TONES" is this.</p>
+                <p>[:t{ToneInHz} {ToneLength}]</p>
+                <p>An example of what a song would look like is this</p>
+                <p>
+                    [:t1174 200 :t0 200 :t1046 200 :t932 200 :t880 600 :t0 200
+                    :t880 200 :t0 200 :t932 200 :t0 200 :t783 400 :t0 200 :t783
+                    200 :t880 200 :t932 200 :t1046 200 :t783 200 :t880 200 :t932
+                    200 :t1046 200 :t1046 200 :t0 200 :t1174 200 :t1046 200
+                    :t932 200 :t0 200 :t880 200 :t0 200 :t1174 200 :t0 200
+                    :t1046 200 :t932 200 :t880 600 :t0 200 :t880 200 :t0 200
+                    :t932 200 :t0 200 :t783 400 :t0 200 :t783 200 :t880 200
+                    :t932 200 :t1046 200 :t783 200 :t880 200 :t932 200 :t1046
+                    200 :t1046 200 :t0 200 :t932 200 :t880 200 :t783 600]
+                </p>
+                <audio src="assets/tone.ogg" controls></audio>
+                <p>Phonemes aren't as hard as you think.</p>
+                <p>They are formatted like this.</p>
+                <p>[{phoneme}&lt;{PhonemeLength},{PhonemePitch}&gt;]</p>
+                <p>An example of what it looks like is this</p>
+                <p>
+                    [diy&lt;200,26>strr<150,28>biy<500,36>ng<300,34>thuh<350>
+                    piy<500,33>s]
+                </p>
+                <audio src="assets/sound.ogg" controls></audio>
+            </div>
+            <br />
+            <div id="guide-segment">
+                <p>
+                    <u><b>PART 2 - TONE BASICS</b></u>
+                </p>
+                <p>Tones are basic.</p>
+                <p>They only have 2 parts.</p>
+                <p>The first part is the tone in hz.</p>
+                <p>The 2nd part is the tone's length.</p>
+                <p>
+                    A useful resource I recommend for this is
+                    <a href="https://pub.colonq.computer/~prod/toy/dbkai/"
+                        >dbkai</a
+                    >
+                    because it has a midi converter (also writing
+                    <a href="https://pub.colonq.computer/~bezelea/bells/"
+                        >bells</a
+                    >
+                    for dectalk is nicer then remembering all of the note
+                    conversions)
+                </p>
+                <p>
+                    (shoutout <a href="https://twitch.tv/prodzpod">prod</a> they
+                    are
+                    <a href="https://youtu.be/s8QpvPYC6zQ?t=7540">!oomfie</a>)
+                </p>
+            </div>
+        </center>
+    </body>
+</html>
