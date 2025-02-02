@@ -32,7 +32,10 @@
                     <a href="https://coffeethencode.dev/dectalk">this</a> as it
                     is a great general guide for how dectalk works.
                 </p>
-                <p>The one downside to dectalk imo is you can't do</p>
+                <p>
+                    The one downside to dectalk imo is you can't have multiple
+                    tracks
+                </p>
             </div>
             <br />
 
@@ -159,15 +162,36 @@
                     <u><b>PART 4 - PHONEME LENGTH</b></u>
                 </p>
                 <p>This part is the only easy part about phonemes</p>
-                <p>asdfzxcvqwerasdfzxcvqwer</p>
+                <p>The length is in ms</p>
                 <p>it's formatted like this</p>
-                <p>[{Phoneme}&lt;{PhonemeLength}>]</p>
+                <p>[{Phoneme}&lt;{PhonemeLengthInMS}>]</p>
                 <p>[hxay<100>hxay<100>.hxehlow]</p>
                 <audio src="assets/pho-length.ogg" controls></audio>
                 <p>
-                    using '.' ',' and '_' will allow the tts to breath while
+                    using '.' ',' and '_' will allow the tts to breathe while
                     singing as shown in the example above
                 </p>
+            </div>
+            <br />
+            <div id="guide-segment">
+                <p>
+                    <u><b>PART 5 - TUNING THE VOICE</b></u>
+                </p>
+                <p>
+                    I recommmend for this portion you use
+                    <a
+                        href="https://dectalk.github.io/dectalk/idh_ref_3_tone_table_2.htm"
+                        >this</a
+                    >
+                    as it will be important for this section
+                </p>
+                <p>
+                    Literally just add the pitch after the phoneme length like
+                    this
+                </p>
+                <p>[{Phoneme}<{PhonemeLengthInMs},{PhonemePitch}>]</p>
+                <p>[hxay<200,29>hxay<200,29>.hxeh<200,22>low<200,20>]</p>
+                <audio src="assets/hello.ogg" controls></audio>
             </div>
             <br />
         </center>
